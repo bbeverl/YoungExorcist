@@ -14,6 +14,7 @@ public class DrawLine : MonoBehaviour
     public LinePointAdded OnLinePointAdded;
     public LineDrawingStopped OnLineDrawingStopped;
 
+	[SerializeField]
 	private LineRenderer line;
 	private bool isMousePressed;
 	public List<Vector3> pointsList;
@@ -25,27 +26,26 @@ public class DrawLine : MonoBehaviour
 		public Vector3 StartPoint;
 		public Vector3 EndPoint;
 	};
-
-	//    -----------------------------------    
+		
 	void Awake ()
 	{
-		// Create line renderer component and set its property
-		line = gameObject.AddComponent<LineRenderer> ();
-		line.material = new Material (Shader.Find ("Particles/Additive"));
-		line.SetVertexCount (0);
-		line.SetWidth (0.1f, 0.1f);
-		line.SetColors (Color.green, Color.green);
-		line.useWorldSpace = true;    
+		if(line == null) {
+			line = gameObject.AddComponent<LineRenderer> ();
+			line.material = new Material (Shader.Find ("Particles/Additive"));
+			line.SetVertexCount (0);
+			line.SetWidth (0.1f, 0.1f);
+			line.SetColors (Color.green, Color.green);
+			line.useWorldSpace = true;    
+		}
+
 		isMousePressed = false;
 		pointsList = new List<Vector3> ();
 
 		if(DrawCamera == null) {
 			DrawCamera = Camera.main;
 		}
-		//        renderer.material.SetTextureOffset(
 	}
-
-	//    -----------------------------------    
+		
 	void Update ()
 	{
 		// If mouse button down, remove old line and set its color to green
@@ -61,6 +61,7 @@ public class DrawLine : MonoBehaviour
 				OnLineDrawingStopped ();
 			}
 		}
+
 		// Drawing line when mouse is moving(presses)
 		if (isMousePressed) {
 			mousePos = DrawCamera.ScreenToWorldPoint (Input.mousePosition);
@@ -69,10 +70,6 @@ public class DrawLine : MonoBehaviour
 				pointsList.Add (mousePos);
 				line.SetVertexCount (pointsList.Count);
 				line.SetPosition (pointsList.Count - 1, (Vector3)pointsList [pointsList.Count - 1]);
-			//	if (isLineCollide ()) {
-			//		isMousePressed = false;
-		//			line.SetColors (Color.red, Color.red);
-		//		}
 
 				if(OnLinePointAdded != null) {
 					if(pointsList.Count > 1) {
@@ -80,8 +77,6 @@ public class DrawLine : MonoBehaviour
 					}
 				}
 			}
-
-			//RayCastForLineHits ();
 
 		}
 	}
