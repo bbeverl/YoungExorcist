@@ -50,8 +50,10 @@ public class DrawLine : MonoBehaviour
 	{
 		// If mouse button down, remove old line and set its color to green
 		if (Input.GetMouseButtonDown (0)) {
-			isMousePressed = true;
-			ResetLines ();
+            if(DrawCamera.pixelRect.Contains(Input.mousePosition)) {
+    			isMousePressed = true;
+    			ResetLines ();
+            }
 		}
 		if (Input.GetMouseButtonUp (0)) {
 			isMousePressed = false;

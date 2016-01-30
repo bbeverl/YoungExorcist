@@ -13,7 +13,10 @@ public class RitualNodeController : MonoBehaviour {
 	[SerializeField]
 	private List<int> hitSequence = new List<int> ();
 
-	private void OnEnable () {
+	private void OnEnable ()
+    {
+        StartCoroutine(TimeoutRitual ());
+
 		if(ritualNodes.Count < 1) {
 			RitualNode[] nodes = GetComponentsInChildren<RitualNode>();
 			ritualNodes.AddRange(nodes);
@@ -40,6 +43,8 @@ public class RitualNodeController : MonoBehaviour {
 	
 	private void OnLinePointAdded (Vector3 previousPoint, Vector3 newPoint)
 	{
+        StopCoroutine(TimeoutRitual ());
+
 		for (int i = 0, ritualNodesCount = ritualNodes.Count; i < ritualNodesCount; i++) {
 			RitualNode node = ritualNodes [i];
 
@@ -52,6 +57,15 @@ public class RitualNodeController : MonoBehaviour {
 		}
 	}
 
+    private System.Collections.IEnumerator TimeoutRitual ()
+    {
+        yield return new WaitForSeconds(2);
+
+        if(hitSequence.Count < 1) {
+            this.gameObject.SetActive(false);
+        }
+    }
+
 	private void OnDrawingStopped ()
 	{
         if(this.gameObject.activeSelf && this.enabled) {
@@ -62,10 +76,8 @@ public class RitualNodeController : MonoBehaviour {
 	private System.Collections.IEnumerator FinishRitual ()
 	{
 		yield return new WaitForSeconds(1);
-
-        ResetRitualEvents ();
-
-
+        
+        this.gameObject.SetActive(false);
 	}
 
     void ResetRitualEvents ()
