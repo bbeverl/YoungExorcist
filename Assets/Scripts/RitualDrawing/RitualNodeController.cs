@@ -34,6 +34,8 @@ public class RitualNodeController : MonoBehaviour {
 			lineDrawer.OnLinePointAdded -= OnLinePointAdded;
 			lineDrawer.OnLineDrawingStopped -= OnDrawingStopped;
 		}
+
+        ResetRitualEvents ();
 	}
 	
 	private void OnLinePointAdded (Vector3 previousPoint, Vector3 newPoint)
@@ -52,19 +54,26 @@ public class RitualNodeController : MonoBehaviour {
 
 	private void OnDrawingStopped ()
 	{
-		StartCoroutine(FinishRitual());
+        if(this.gameObject.activeSelf && this.enabled) {
+		    StartCoroutine(FinishRitual());
+        }
 	}
 
 	private System.Collections.IEnumerator FinishRitual ()
 	{
 		yield return new WaitForSeconds(1);
 
-		lineDrawer.ResetLines ();
+        ResetRitualEvents ();
 
-		for (int i = 0, ritualNodesCount = ritualNodes.Count; i < ritualNodesCount; i++) {
-			ritualNodes[i].ResetHit();
-		}
 
-		hitSequence.Clear();
 	}
+
+    void ResetRitualEvents ()
+    {
+        lineDrawer.ResetLines ();
+        for (int i = 0, ritualNodesCount = ritualNodes.Count; i < ritualNodesCount; i++) {
+            ritualNodes [i].ResetHit ();
+        }
+        hitSequence.Clear ();
+    }
 }

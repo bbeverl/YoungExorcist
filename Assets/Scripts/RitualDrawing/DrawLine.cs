@@ -8,22 +8,24 @@ public class DrawLine : MonoBehaviour
 {
 	public Camera DrawCamera;
 
+    public delegate void LinePointAdded (Vector3 previousPoint, Vector3 newPoint);
+    public delegate void LineDrawingStopped ();
+
+    public LinePointAdded OnLinePointAdded;
+    public LineDrawingStopped OnLineDrawingStopped;
+
 	private LineRenderer line;
 	private bool isMousePressed;
 	public List<Vector3> pointsList;
 	private Vector3 mousePos;
 
-	public delegate void LinePointAdded (Vector3 previousPoint, Vector3 newPoint);
-	public delegate void LineDrawingStopped ();
-
-	public LinePointAdded OnLinePointAdded;
-	public LineDrawingStopped OnLineDrawingStopped;
 	// Structure for line points
 	struct myLine
 	{
 		public Vector3 StartPoint;
 		public Vector3 EndPoint;
 	};
+
 	//    -----------------------------------    
 	void Awake ()
 	{
@@ -42,6 +44,7 @@ public class DrawLine : MonoBehaviour
 		}
 		//        renderer.material.SetTextureOffset(
 	}
+
 	//    -----------------------------------    
 	void Update ()
 	{
@@ -80,6 +83,14 @@ public class DrawLine : MonoBehaviour
 
 		}
 	}
+
+    void OnDisable ()
+    {
+        ResetLines ();
+        if(OnLineDrawingStopped != null) {
+            OnLineDrawingStopped ();
+        }
+    }
 
 	public void ResetLines ()
 	{
