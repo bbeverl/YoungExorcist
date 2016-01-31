@@ -39,16 +39,35 @@ public class GameManager : ScriptableObject {
 			return ritualController;
 		}
     }
+
+	public RestartGame RestartButton {
+		get; set;
+	}
   
 	public bool StartRitual (RitualStarter target)
     {
-        if(RitualController != null && !RitualController.IsRitualRunning) {            
+		
+        if(Player != null && RitualController != null && !RitualController.IsRitualRunning) {            
             RitualController.StartRitual (target);
         }
 
         return false;
     }
 
-
+	public void KillPlayer ()
+	{
+		if(Player != null)
+		{
+			Destroy(Player);
+		}
+		// End Ritual
+		if(RitualController != null && RitualController.IsRitualRunning) {
+			RitualController.AbandonRitual ();
+		}
+		// End Game
+		if(RestartButton != null) {
+			RestartButton.gameObject.SetActive(true);
+		}
+	}
 
 }

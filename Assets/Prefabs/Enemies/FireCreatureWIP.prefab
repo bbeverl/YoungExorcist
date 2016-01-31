@@ -12,6 +12,7 @@ GameObject:
   - 65: {fileID: 6588220}
   - 114: {fileID: 11491998}
   - 114: {fileID: 11467266}
+  - 114: {fileID: 11443834}
   m_Layer: 0
   m_Name: FireCreatureWIP
   m_TagString: Untagged
@@ -43,6 +44,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.5, y: 3, z: 0.19999997}
   m_Center: {x: 0, y: 0.17, z: 0.000000029802322}
+--- !u!114 &11443834
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 190216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c422cbcb527baab4fafdbb9949ca6a00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11467266
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -62,7 +74,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 190216}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77869b92e221d4961a07168c5d353c57, type: 3}
+  m_Script: {fileID: 11500000, guid: cc1db0b2762eedf4e92db955abd9c20d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!212 &21257716

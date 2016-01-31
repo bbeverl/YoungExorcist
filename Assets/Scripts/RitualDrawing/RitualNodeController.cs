@@ -65,6 +65,12 @@ public class RitualNodeController : MonoBehaviour {
         StartCoroutine (WaitAndEnable ());
     }
 
+	public void AbandonRitual ()
+	{
+		StopAllCoroutines ();
+		StartCoroutine(FadeOutRitual ());
+	}
+
     private System.Collections.IEnumerator WaitAndEnable ()
     {                        
         yield return new WaitForSeconds(0.1f);
@@ -100,6 +106,8 @@ public class RitualNodeController : MonoBehaviour {
             }
         }
     }
+
+
 
 	private void OnDrawingStopped ()
 	{
