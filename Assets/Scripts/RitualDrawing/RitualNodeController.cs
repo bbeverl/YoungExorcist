@@ -29,8 +29,6 @@ public class RitualNodeController : MonoBehaviour {
 
     private void Awake ()
     {        
-        GameManager.Instance.RitualController = this;
-
         if(lineDrawer == null) {            
             lineDrawer = GetComponentInChildren<DrawLine>();
         }
@@ -49,8 +47,6 @@ public class RitualNodeController : MonoBehaviour {
         
 	private void OnDestroy () 
 	{
-        GameManager.Instance.RitualController = null;
-
 		if(lineDrawer != null) {
 			lineDrawer.OnLinePointAdded -= OnLinePointAdded;
 			lineDrawer.OnLineDrawingStopped -= OnDrawingStopped;

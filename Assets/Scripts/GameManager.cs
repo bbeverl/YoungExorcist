@@ -23,7 +23,7 @@ public class GameManager : ScriptableObject {
     public GameObject Player {
         get {
             if(player == null) {
-                // Find the Player GO
+				player = GameObject.FindGameObjectWithTag("Player");
             }
             return player;
         }
@@ -32,7 +32,12 @@ public class GameManager : ScriptableObject {
     private RitualNodeController ritualController;
     public RitualNodeController RitualController
     {
-        get; set;
+		get {
+			if(ritualController == null) {
+				ritualController = FindObjectOfType<RitualNodeController>();
+			}
+			return ritualController;
+		}
     }
   
     public bool StartRitual (GameObject target)
