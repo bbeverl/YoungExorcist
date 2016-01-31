@@ -53,7 +53,7 @@ public class GameManager : ScriptableObject {
 
 	public RestartGame RestartButton {
 		get; set;
-	}
+	}        
   
 	public bool StartRitual (RitualStarter target)
     {
@@ -87,6 +87,32 @@ public class GameManager : ScriptableObject {
             return GameManager.Instance.AudioController.PlaySound(AudioController.WalkSound);
         }
         return false;
+    }
+
+    private int creaturesDown = 0;
+    public void CreatureDown (GameObject creature) {
+        creaturesDown++;
+        GameObject.Destroy(creature);
+
+        if(creaturesDown > 2) {
+            
+            RestartButton.gameObject.SetActive(true);
+            RestartButton.ChangeTextForWin ();
+        }
+    }
+
+    public void MoveToFloor (int floorNum)
+    {
+        GameObject floorSpawn = null;
+        if(floorNum == 1) {
+            floorSpawn = GameObject.Find("FloorOneTeleport");
+        } else if (floorNum == 2) {
+            floorSpawn = GameObject.Find("FloorTwoTeleport");
+        }
+        if(floorSpawn == null) return;
+
+        // Move Player to stairs
+        // Move Camera
     }
 
 }

@@ -5,7 +5,7 @@ using System.Collections;
 public class ShadowSprite : MonoBehaviour {
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		SpriteRenderer sprite = GetComponent<SpriteRenderer> ();
 		sprite.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
 		sprite.receiveShadows = true;

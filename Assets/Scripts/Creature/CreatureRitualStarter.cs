@@ -9,8 +9,10 @@ public abstract class CreatureRitualStarter : RitualStarter {
 	public override void HandleRitualFinished (int[] sequence)
 	{
 		if(CheckRitualSequence (sequence)) {
-			Destroy(this.gameObject);
+            GameManager.Instance.CreatureDown (this.gameObject);
 		}
+
+
 	}
 	#endregion
 	

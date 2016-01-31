@@ -13,4 +13,10 @@ public class RestartGame : MonoBehaviour {
 	{
 		UnityEngine.SceneManagement.SceneManager.LoadScene (0);
 	}
+
+    public void ChangeTextForWin ()
+    {
+        UnityEngine.UI.Text text = GetComponentInChildren<UnityEngine.UI.Text>();
+        text.text = "You Won! Press to restart";
+    }
 }
