@@ -7,6 +7,8 @@ public class KillPlayer : MonoBehaviour {
 	{
 		if(collision.gameObject == GameManager.Instance.Player) {
 			GameManager.Instance.KillPlayer();
+
+	
 		}
 	}
 }
