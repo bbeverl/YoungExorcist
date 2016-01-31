@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TopDownCharacterController : MonoBehaviour {
+public class PlayerMovementController : MonoBehaviour {
 
     private float moveSpeed = 3;
 	private SpriteRenderer sprite;
@@ -22,7 +22,6 @@ public class TopDownCharacterController : MonoBehaviour {
         if(GameManager.Instance.RitualController.IsRitualRunning == false) {
             Vector3 inputMovement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
-            //myRigidbody.MovePosition((myRigidbody.position + AxisInput) * Time.fixedDeltaTime * Speed);
             transform.Translate(inputMovement*Time.deltaTime*moveSpeed, Space.World);
 
 			if(inputMovement.x < 0) {
