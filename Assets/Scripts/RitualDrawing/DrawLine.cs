@@ -84,9 +84,6 @@ public class DrawLine : MonoBehaviour
     void OnDisable ()
     {
         ResetLines ();
-        if(OnLineDrawingStopped != null) {
-            OnLineDrawingStopped ();
-        }
     }
 
 	public void ResetLines ()
