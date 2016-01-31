@@ -114,10 +114,9 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 404990}
-  - 114: {fileID: 11449726}
   m_Layer: 0
   m_Name: Ritual Nodes
-  m_TagString: RitualController
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -246,6 +245,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &187652
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 421418}
+  - 114: {fileID: 11440202}
+  m_Layer: 0
+  m_Name: Ritual Controller
+  m_TagString: RitualController
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &195286
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,8 +299,8 @@ Transform:
   - {fileID: 407934}
   - {fileID: 437890}
   - {fileID: 447648}
-  m_Father: {fileID: 22438700}
-  m_RootOrder: 1
+  m_Father: {fileID: 421418}
+  m_RootOrder: 0
 --- !u!4 &407934
 Transform:
   m_ObjectHideFlags: 1
@@ -322,6 +337,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 404990}
   m_RootOrder: 3
+--- !u!4 &421418
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187652}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 404990}
+  m_Father: {fileID: 22438700}
+  m_RootOrder: 1
 --- !u!4 &424634
 Transform:
   m_ObjectHideFlags: 1
@@ -694,6 +722,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f4a5b1102607f848b3e4e65e2735dc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11440202
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4716ad0660bbd243a694f164ae3d1fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lineDrawer: {fileID: 11460954}
+  ritualNodes: []
+  hitSequence: 
+  ritualTimeout: 2
+  ritualFinishDelay: 0.5
+  nodeParent: {fileID: 142036}
 --- !u!114 &11448072
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -705,22 +750,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f4a5b1102607f848b3e4e65e2735dc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &11449726
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 142036}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4716ad0660bbd243a694f164ae3d1fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lineDrawer: {fileID: 11460954}
-  ritualNodes: []
-  hitSequence: 
-  ritualTimeout: 2
-  ritualFinishDelay: 0.5
 --- !u!114 &11452392
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1176,7 +1205,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 22442970}
-  - {fileID: 404990}
+  - {fileID: 421418}
   m_Father: {fileID: 425926}
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}

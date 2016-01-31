@@ -6,6 +6,7 @@ TagManager:
   tags:
   - upstairs
   - downstairs
+  - RitualController
   layers:
   - Default
   - TransparentFX
