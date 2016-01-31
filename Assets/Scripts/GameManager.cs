@@ -89,7 +89,7 @@ public class GameManager : ScriptableObject {
     public bool PlaySound (int clipNum)
     {
         if(GameManager.Instance.AudioController != null) {
-            return GameManager.Instance.AudioController.PlaySound(AudioController.WalkSound);
+            return GameManager.Instance.AudioController.PlaySound(clipNum);
         }
         return false;
     }
