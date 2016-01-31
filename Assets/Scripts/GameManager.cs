@@ -60,6 +60,8 @@ public class GameManager : ScriptableObject {
 		
         if(Player != null && RitualController != null && !RitualController.IsRitualRunning) {            
             RitualController.StartRitual (target);
+			GameManager.Instance.PlaySound(1);
+
         }
 
         return false;
@@ -70,10 +72,13 @@ public class GameManager : ScriptableObject {
 		if(Player != null)
 		{
 			Destroy(Player);
+			GameManager.Instance.PlaySound(6);
+
 		}
 		// End Ritual
 		if(RitualController != null && RitualController.IsRitualRunning) {
 			RitualController.AbandonRitual ();
+
 		}
 		// End Game
 		if(RestartButton != null) {
@@ -116,3 +121,5 @@ public class GameManager : ScriptableObject {
     }
 
 }
+
+

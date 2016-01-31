@@ -7,6 +7,13 @@ public class AudioController : MonoBehaviour {
 
     public static int WalkSound = 0;
     public static int SelectEnemy = 1;
+	public static int CastSpell = 2;
+	public static int FailSpell = 3;
+	public static int MonsterAttacks = 4;
+	public static int Stairs = 5;
+	public static int MonsterDefeat = 6;
+
+
 
     void Start ()
     {

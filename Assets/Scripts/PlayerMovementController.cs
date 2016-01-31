@@ -26,7 +26,7 @@ public class PlayerMovementController : MonoBehaviour {
             transform.Translate(translation, Space.World);
 
             if(translation.magnitude > 0) {
-                GameManager.Instance.PlaySound(AudioController.WalkSound);
+                GameManager.Instance.PlaySound(0);
             }
 
 			if(inputMovement.x < 0) {
