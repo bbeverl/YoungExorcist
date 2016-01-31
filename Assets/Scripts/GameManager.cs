@@ -40,6 +40,17 @@ public class GameManager : ScriptableObject {
 		}
     }
 
+    private AudioController audioController;
+    public AudioController AudioController
+    {
+        get {
+            if(audioController == null) {
+                audioController = FindObjectOfType<AudioController>();
+            }
+            return audioController;
+        }
+    }
+
 	public RestartGame RestartButton {
 		get; set;
 	}
@@ -69,5 +80,13 @@ public class GameManager : ScriptableObject {
 			RestartButton.gameObject.SetActive(true);
 		}
 	}
+
+    public bool PlaySound (int clipNum)
+    {
+        if(GameManager.Instance.AudioController != null) {
+            return GameManager.Instance.AudioController.PlaySound(AudioController.WalkSound);
+        }
+        return false;
+    }
 
 }

@@ -1,27 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerSound : MonoBehaviour {
-
-	public AudioSource audioClip;
-
+public class MoveToFloor2 : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
 	
-
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	
-
-		//PlaySound (index of array on player);
-
-
 	}
-
-
-
-
 }
