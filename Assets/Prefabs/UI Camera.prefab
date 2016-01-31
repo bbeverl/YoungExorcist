@@ -117,11 +117,11 @@ GameObject:
   - 114: {fileID: 11449726}
   m_Layer: 0
   m_Name: Ritual Nodes
-  m_TagString: Untagged
+  m_TagString: RitualController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &142392
 GameObject:
   m_ObjectHideFlags: 1
@@ -719,6 +719,8 @@ MonoBehaviour:
   lineDrawer: {fileID: 11460954}
   ritualNodes: []
   hitSequence: 
+  ritualTimeout: 2
+  ritualFinishDelay: 0.5
 --- !u!114 &11452392
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -854,8 +856,8 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions: []
   m_Parameters:
-    startWidth: 0.5
-    endWidth: 0.5
+    startWidth: 0.2
+    endWidth: 0.2
     m_StartColor:
       serializedVersion: 2
       rgba: 4294967295

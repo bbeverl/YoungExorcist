@@ -13,58 +13,91 @@ public class RitualNodeController : MonoBehaviour {
 	[SerializeField]
 	private List<int> hitSequence = new List<int> ();
 
-	private void OnEnable ()
-    {
-		
-        StartCoroutine(TimeoutRitual ());
+    [SerializeField]
+    private float ritualTimeout = 2f;
+    [SerializeField]
+    private float ritualFinishDelay = 0.5f;
 
-		if(ritualNodes.Count < 1) {
-			RitualNode[] nodes = GetComponentsInChildren<RitualNode>();
-			ritualNodes.AddRange(nodes);
-		}
+    [SerializeField]
+    private GameObject nodeParent;
 
-		if(lineDrawer == null) {			
-			lineDrawer = GetComponentInChildren<DrawLine>();
-		}
-		if(lineDrawer != null) {
-			lineDrawer.OnLinePointAdded += OnLinePointAdded;
-			lineDrawer.OnLineDrawingStopped += OnDrawingStopped;
-		}
-	}
+    public bool IsRitualRunning {
+        get; private set;
+    }
 
-	private void OnDisable () 
+    bool drawStarted = false;
+
+    private void Awake ()
+    {        
+        GameManager.Instance.RitualController = this;
+
+        if(lineDrawer == null) {            
+            lineDrawer = GetComponentInChildren<DrawLine>();
+        }
+        if(lineDrawer != null) {
+            lineDrawer.OnLinePointAdded += OnLinePointAdded;
+            lineDrawer.OnLineDrawingStopped += OnDrawingStopped;
+        }
+
+        if(ritualNodes.Count < 1) {
+            RitualNode[] nodes = GetComponentsInChildren<RitualNode>();
+            ritualNodes.AddRange(nodes);
+        }
+
+        nodeParent.SetActive (false);
+    }
+        
+	private void OnDestroy () 
 	{
+        GameManager.Instance.RitualController = null;
+
 		if(lineDrawer != null) {
 			lineDrawer.OnLinePointAdded -= OnLinePointAdded;
 			lineDrawer.OnLineDrawingStopped -= OnDrawingStopped;
 		}
 
+        StopAllCoroutines ();
         ResetRitualEvents ();
 	}
-	
-	private void OnLinePointAdded (Vector3 previousPoint, Vector3 newPoint)
-	{
-        StopCoroutine(TimeoutRitual ());
 
-		for (int i = 0, ritualNodesCount = ritualNodes.Count; i < ritualNodesCount; i++) {
-			RitualNode node = ritualNodes [i];
+    public void StartRitual ()
+    {
+        IsRitualRunning = true;
 
-			if (node.DetectHit (previousPoint, newPoint)) {
-				node.Hit ();
-				if(hitSequence.Count == 0 || hitSequence[hitSequence.Count - 1] != i) {
-					hitSequence.Add(i);
-				}
-			}
-		}
-	}
+        StartCoroutine (WaitAndEnable ());
+    }
 
+    private System.Collections.IEnumerator WaitAndEnable ()
+    {                        
+        yield return new WaitForSeconds(0.1f);
+        nodeParent.SetActive(true);
+        StartCoroutine(TimeoutRitual ());
+    }
+		
     private System.Collections.IEnumerator TimeoutRitual ()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(ritualTimeout);
 
-        if(hitSequence.Count < 1) {
+        if(drawStarted == false) {
 			StartCoroutine(FadeOutRitual ());
-            //this.gameObject.SetActive(false);
+        }
+    }
+
+    private void OnLinePointAdded (Vector3 previousPoint, Vector3 newPoint)
+    {
+        StopCoroutine(TimeoutRitual ());
+
+        drawStarted = true;
+
+        for (int i = 0, ritualNodesCount = ritualNodes.Count; i < ritualNodesCount; i++) {
+            RitualNode node = ritualNodes [i];
+
+            if (node.DetectHit (previousPoint, newPoint)) {
+                node.Hit ();
+                if(hitSequence.Count == 0 || hitSequence[hitSequence.Count - 1] != i) {
+                    hitSequence.Add(i);
+                }
+            }
         }
     }
 
@@ -77,10 +110,11 @@ public class RitualNodeController : MonoBehaviour {
 
 	private System.Collections.IEnumerator FinishRitual ()
 	{
-		yield return new WaitForSeconds(0.5f);
+		yield return new WaitForSeconds(ritualFinishDelay);
         
-		StartCoroutine(FadeOutRitual ());
-        //this.gameObject.SetActive(false);
+       StartCoroutine(FadeOutRitual ());
+
+       // ResetRitualEvents ();
 	}
 
 	float MaxAlpha(Renderer[] rendererObjects)
@@ -130,13 +164,14 @@ public class RitualNodeController : MonoBehaviour {
 			yield return null; 
 		}
 
-		this.gameObject.SetActive(false);
-		for (int i = 0; i < rendererObjects.Length; i++)
-		{
-			Color newColor = rendererObjects[i].material.color;
-			newColor.a = 1;			
-			rendererObjects[i].material.SetColor("_Color", newColor) ; 
-		}
+        for (int i = 0; i < rendererObjects.Length; i++)
+        {
+            Color newColor = rendererObjects[i].material.color;
+            newColor.a = 1;         
+            rendererObjects[i].material.SetColor("_Color", newColor) ; 
+        }
+
+        ResetRitualEvents ();
 	}
 
     void ResetRitualEvents ()
@@ -148,6 +183,12 @@ public class RitualNodeController : MonoBehaviour {
         }
 
         hitSequence.Clear ();
+
+        drawStarted = false;
+        IsRitualRunning = false;
+
+        nodeParent.SetActive(false);
+
     }
 
 }
