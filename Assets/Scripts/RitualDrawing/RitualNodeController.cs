@@ -21,6 +21,8 @@ public class RitualNodeController : MonoBehaviour {
     [SerializeField]
     private GameObject nodeParent;
 
+	private RitualStarter currentTarget;
+
     public bool IsRitualRunning {
         get; private set;
     }
@@ -56,10 +58,10 @@ public class RitualNodeController : MonoBehaviour {
         ResetRitualEvents ();
 	}
 
-    public void StartRitual ()
+	public void StartRitual (RitualStarter target)
     {
         IsRitualRunning = true;
-
+		currentTarget = target;
         StartCoroutine (WaitAndEnable ());
     }
 
@@ -87,11 +89,13 @@ public class RitualNodeController : MonoBehaviour {
 
         for (int i = 0, ritualNodesCount = ritualNodes.Count; i < ritualNodesCount; i++) {
             RitualNode node = ritualNodes [i];
+			int sequenceValue = (i+1);
 
             if (node.DetectHit (previousPoint, newPoint)) {
                 node.Hit ();
-                if(hitSequence.Count == 0 || hitSequence[hitSequence.Count - 1] != i) {
-                    hitSequence.Add(i);
+				if(hitSequence.Count == 0 || hitSequence[hitSequence.Count - 1] != sequenceValue) {
+					// Our sequences are not 0 based. So add 1 to the number.
+					hitSequence.Add(sequenceValue);
                 }
             }
         }
@@ -108,6 +112,10 @@ public class RitualNodeController : MonoBehaviour {
 	{
 		yield return new WaitForSeconds(ritualFinishDelay);
         
+		if(currentTarget != null) {
+			currentTarget.HandleRitualFinished (hitSequence.ToArray());
+		}
+
        StartCoroutine(FadeOutRitual ());
 
        // ResetRitualEvents ();
@@ -182,6 +190,7 @@ public class RitualNodeController : MonoBehaviour {
 
         drawStarted = false;
         IsRitualRunning = false;
+		currentTarget = null;
 
         nodeParent.SetActive(false);
 

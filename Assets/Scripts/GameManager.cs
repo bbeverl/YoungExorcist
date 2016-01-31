@@ -40,10 +40,10 @@ public class GameManager : ScriptableObject {
 		}
     }
   
-    public bool StartRitual (GameObject target)
+	public bool StartRitual (RitualStarter target)
     {
         if(RitualController != null && !RitualController.IsRitualRunning) {            
-            RitualController.StartRitual ();
+            RitualController.StartRitual (target);
         }
 
         return false;
