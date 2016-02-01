@@ -111,12 +111,20 @@ public class GameManager : ScriptableObject {
         GameObject floorSpawn = null;
         if(floorNum == 1) {
             floorSpawn = GameObject.Find("FloorOneTeleport");
+			Vector3 newCamPos = Camera.main.transform.position;
+			newCamPos.z = 0;
+			Camera.main.transform.position = newCamPos;
         } else if (floorNum == 2) {
             floorSpawn = GameObject.Find("FloorTwoTeleport");
+
+			Vector3 newCamPos = Camera.main.transform.position;
+			newCamPos.z = 20;
+			Camera.main.transform.position = newCamPos;
         }
         if(floorSpawn == null) return;
 
         // Move Player to stairs
+		Player.transform.position = floorSpawn.transform.position;
         // Move Camera
     }
 
