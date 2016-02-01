@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 488320}
   - 212: {fileID: 21260292}
   - 65: {fileID: 6563580}
+  - 114: {fileID: 11497960}
   m_Layer: 0
   m_Name: SickCouchWIP
   m_TagString: Untagged
@@ -41,6 +42,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.4150023, y: 2.0973434, z: 0.19999996}
   m_Center: {x: -0.011166658, y: 0.15633209, z: -0.000000018636237}
+--- !u!114 &11497960
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 167310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e57071d718848ef4ba5c05542f2621cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &21260292
 SpriteRenderer:
   m_ObjectHideFlags: 1
