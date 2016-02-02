@@ -1,4 +1,5 @@
-﻿Shader "Custom/SpriteShadow" {
+﻿// https://github.com/anlev/Unity-2D-Sprite-cast-and-receive-shadows/blob/master/SpriteShadow.shader
+Shader "Custom/SpriteShadow" {
 	Properties {
 		_Color ("Color", Color) = (1,1,1,1)
 		[PerRendererData]_MainTex ("Sprite Texture", 2D) = "white" {}

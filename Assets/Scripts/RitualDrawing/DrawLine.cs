@@ -2,7 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
-// - See more at: http://www.theappguruz.com/blog/draw-line-mouse-move-detect-line-collision-unity2d-unity3d#sthash.Vt4EQLPN.dpuf
+// Original draw line renderer code taken from
+// http://www.theappguruz.com/blog/draw-line-mouse-move-detect-line-collision-unity2d-unity3d
 
 public class DrawLine : MonoBehaviour
 {

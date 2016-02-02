@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// Original FollowCamera for 2D top down taken from here :
+// http://answers.unity3d.com/questions/29183/2d-camera-smooth-follow.html
+// https://gist.github.com/unity3diy/5aa0b098cb06b3ccbe47
+
 public class CameraFollow : MonoBehaviour {
 
     public float interpVelocity;
